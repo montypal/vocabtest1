@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocabulary Roots Quiz</title>
+    <title>Vocabulary Roots Quiz - 64 Questions</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,6 +15,14 @@
             height: 100vh;
             margin: 0;
         }
+        .main-wrapper {
+            display: flex;
+            gap: 20px;
+            width: 95%;
+            max-width: 900px;
+            align-items: flex-start;
+            justify-content: center;
+        }
         .quiz-container {
             background: #fff;
             padding: 30px;
@@ -24,9 +32,35 @@
             max-width: 500px;
             text-align: center;
         }
+        .word-bank-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 250px;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none; 
+        }
         h1 {
             color: #2c3e50;
             margin-top: 0;
+        }
+        h3 {
+            margin-top: 0;
+            color: #3498db;
+            text-align: center;
+        }
+        .word-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            font-size: 14px;
+        }
+        .word-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
         }
         .definition-box {
             font-size: 18px;
@@ -72,31 +106,46 @@
         .correct { color: #27ae60; }
         .incorrect { color: #c0392b; }
         #progress {
-            margin-top: 20px;
+            margin-top: 5px;
             font-size: 14px;
             color: #7f8c8d;
+        }
+        #part-info {
+            font-weight: bold;
+            color: #e67e22;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="quiz-container">
-    <h1>Roots Unit 1 Quiz</h1>
-    
-    <div id="quiz-area">
-        <div id="progress"></div>
-        <div class="definition-box" id="definition-text">Loading...</div>
-        <input type="text" id="answer-input" placeholder="Type the word here..." autocomplete="off">
-        <br>
-        <button id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
-        <button id="next-btn" onclick="nextPage()" style="display: none;">Next Page</button>
-        <div id="feedback"></div>
+<div class="main-wrapper">
+    <!-- Word Bank Sidebar -->
+    <div class="word-bank-container" id="word-bank-container">
+        <h3>Word Bank</h3>
+        <ul class="word-list" id="word-list"></ul>
     </div>
 
-    <div id="result-area" style="display: none;">
-        <h2>Quiz Complete!</h2>
-        <p id="final-score"></p>
-        <button onclick="restartQuiz()">Restart Quiz</button>
+    <!-- Quiz Area -->
+    <div class="quiz-container">
+        <h1>Roots Unit 1 Quiz</h1>
+        
+        <div id="quiz-area">
+            <div id="part-info"></div>
+            <div id="progress"></div>
+            <div class="definition-box" id="definition-text">Loading...</div>
+            <input type="text" id="answer-input" placeholder="Type the word here..." autocomplete="off">
+            <br>
+            <button id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+            <button id="next-btn" onclick="nextPage()" style="display: none;">Next Page</button>
+            <div id="feedback"></div>
+        </div>
+
+        <div id="result-area" style="display: none;">
+            <h2>Quiz Complete!</h2>
+            <p id="final-score"></p>
+            <button onclick="restartQuiz()">Restart Quiz</button>
+        </div>
     </div>
 </div>
 
@@ -144,14 +193,25 @@
         return array;
     }
 
-    // Get the current page number from the URL parameters
+    // Populate Word Bank
+    const sortedWords = [...masterVocabList].map(item => item.word).sort();
+    const wordListElement = document.getElementById('word-list');
+    sortedWords.forEach(w => {
+        const li = document.createElement('li');
+        li.textContent = w;
+        wordListElement.appendChild(li);
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     let currentPage = parseInt(urlParams.get('q'));
 
-    // If no page is set, initialize the quiz session and redirect to page 0
     if (isNaN(currentPage)) {
-        const shuffledList = shuffleArray([...masterVocabList]);
-        sessionStorage.setItem('vocabQuizList', JSON.stringify(shuffledList));
+        // Create 64 questions: Two full shuffled sets of the 32 words
+        const part1 = shuffleArray([...masterVocabList]);
+        const part2 = shuffleArray([...masterVocabList]);
+        const combinedList = part1.concat(part2);
+        
+        sessionStorage.setItem('vocabQuizList', JSON.stringify(combinedList));
         sessionStorage.setItem('vocabScore', '0');
         window.location.href = "?q=0";
     } else {
@@ -161,15 +221,22 @@
     function runPageLogic() {
         const activeList = JSON.parse(sessionStorage.getItem('vocabQuizList'));
         
-        // If out of bounds, show results
         if (currentPage >= activeList.length) {
             showResults(activeList.length);
             return;
         }
 
-        // Load content for the current sequential page
+        // Toggle Parts (Part 1: 0-31, Part 2: 32-63)
+        if (currentPage < 32) {
+            document.getElementById('word-bank-container').style.display = 'block';
+            document.getElementById('part-info').textContent = 'Part 1: Word Bank Available';
+        } else {
+            document.getElementById('word-bank-container').style.display = 'none';
+            document.getElementById('part-info').textContent = 'Part 2: No Word Bank (Memory Only)';
+        }
+
         document.getElementById("definition-text").textContent = activeList[currentPage].def;
-        document.getElementById("progress").textContent = `Page ${currentPage + 1} of ${activeList.length}`;
+        document.getElementById("progress").textContent = `Question ${currentPage + 1} of ${activeList.length}`;
         
         const answerInput = document.getElementById("answer-input");
         answerInput.focus();
@@ -206,7 +273,6 @@
             feedback.textContent = "Correct!";
             feedback.className = "correct";
             
-            // Increment score in session storage
             let currentScore = parseInt(sessionStorage.getItem('vocabScore'));
             sessionStorage.setItem('vocabScore', (currentScore + 1).toString());
         } else {
@@ -216,12 +282,12 @@
     }
 
     function nextPage() {
-        // Navigate the browser to the next sequential page URL
         window.location.href = `?q=${currentPage + 1}`;
     }
 
     function showResults(totalQuestions) {
         document.getElementById("quiz-area").style.display = "none";
+        document.getElementById("word-bank-container").style.display = "none";
         document.getElementById("result-area").style.display = "block";
         
         const finalScore = sessionStorage.getItem('vocabScore');
@@ -231,7 +297,7 @@
     function restartQuiz() {
         sessionStorage.removeItem('vocabQuizList');
         sessionStorage.removeItem('vocabScore');
-        window.location.href = window.location.pathname; // Strips the query parameter to restart
+        window.location.href = window.location.pathname; 
     }
 </script>
 
