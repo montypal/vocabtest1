@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocabulary Roots Quiz - 64 Questions</title>
+    <title>Combined Vocabulary Roots Quiz</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -40,11 +40,12 @@
             width: 250px;
             max-height: 80vh;
             overflow-y: auto;
-            display: none; 
+            display: none;
         }
         h1 {
             color: #2c3e50;
             margin-top: 0;
+            font-size: 24px;
         }
         h3 {
             margin-top: 0;
@@ -63,7 +64,7 @@
             border-bottom: 1px solid #eee;
         }
         .definition-box {
-            font-size: 18px;
+            font-size: 16px;
             font-style: italic;
             margin: 20px 0;
             padding: 15px;
@@ -128,7 +129,7 @@
 
     <!-- Quiz Area -->
     <div class="quiz-container">
-        <h1>Roots Unit 1 Quiz</h1>
+        <h1>Roots Units 1 & 2 Quiz</h1>
         
         <div id="quiz-area">
             <div id="part-info"></div>
@@ -151,50 +152,94 @@
 
 <script>
     const masterVocabList = [
-        { word: "Benediction", def: "A prayer asking for God's blessing, especially a prayer that concludes a worship service" },
-        { word: "Benefactor", def: "Someone who helps another person or group, especially by giving money" },
-        { word: "Beneficiary", def: "A person or organization that benefits or is expected to benefit from something, especially one the receives money or property when someone dies" },
-        { word: "Benevolence", def: "Kindness, generosity" },
-        { word: "Amicable", def: "Friendly, peaceful" },
-        { word: "Enamored", def: "Charmed or fascinated, inflamed with love" },
-        { word: "Amorous", def: "Having or showing strong feelings of attraction" },
-        { word: "Paramour", def: "A lover, often secret, not allowed by law or custom" },
-        { word: "Antebellum", def: "Existing before a war, especially before the American Civil War (1861-65)" },
-        { word: "Bellicose", def: "Warlike, aggressive, quarrelsome" },
-        { word: "Belligerence", def: "Aggressiveness, combativeness" },
-        { word: "Rebellion", def: "Open defiance and opposition, sometimes armed, to a person or thing in authority" },
-        { word: "Pacify", def: "To soothe anger or agitation; To subdue by armed action" },
-        { word: "Pacifist", def: "A person opposed to war or violence, especially someone who refuses to bear arms or to fight, on moral or religious grounds" },
-        { word: "Pact", def: "An agreement between two or more people or groups, a treaty or formal agreement between nations to deal with a problem or resolve a dispute" },
-        { word: "Pace", def: "Contrary to the opinions of" },
-        { word: "Criminology", def: "The study of crime, criminals, law enforcement, and punishment" },
-        { word: "Decriminalize", def: "To remove or reduce the criminal status of" },
-        { word: "Incriminate", def: "To show evidence or involvement in a crime" },
-        { word: "Recrimination", def: "An accusation in answer to an accusation made against oneself" },
-        { word: "Approbation", def: "A formal or official act of approving, praise, usually given with pleasure or enthusiasm" },
-        { word: "Probate", def: "The process of proving in court that the will of someone who has died is valid, and of administering the estate of a dead person" },
-        { word: "Probity", def: "Absolute honesty and uprightness" },
-        { word: "Reprobate", def: "A person of thoroughly bad character" },
-        { word: "Grave", def: "Requiring serious thought or concern; Serious and formal in appearance or manner" },
-        { word: "Gravitas", def: "Great or very dignified seriousness" },
-        { word: "Gravitate", def: "To move or be drawn toward something, especially by a natural tendency or as if by an invisible force" },
-        { word: "Aggravate", def: "To make an injury more serious or severe; To annoy or bother" },
-        { word: "Alleviate", def: "To lighten, lessen, or relieve, especially physical or mental suffering" },
-        { word: "Elevation", def: "The height of a place; The act or result of lifting or raising someone or something" },
-        { word: "Cantilever", def: "A long piece of wood, metal, etc that sticks out from a wall to support something above it" },
-        { word: "Levity", def: "Lack of appropriate seriousness" }
+        // Roots Unit 1
+        { word: "Benediction", def: "A prayer asking for God's blessing, especially a prayer that concludes a worship service[cite: 1]" },
+        { word: "Benefactor", def: "Someone who helps another person or group, especially by giving money[cite: 1]" },
+        { word: "Beneficiary", def: "A person or organization that benefits or is expected to benefit from something, especially one the receives money or property when someone dies[cite: 1]" },
+        { word: "Benevolence", def: "Kindness, generosity[cite: 1]" },
+        { word: "Amicable", def: "Friendly, peaceful[cite: 1]" },
+        { word: "Enamored", def: "Charmed or fascinated, inflamed with love[cite: 1]" },
+        { word: "Amorous", def: "Having or showing strong feelings of attraction[cite: 1]" },
+        { word: "Paramour", def: "A lover, often secret, not allowed by law or custom[cite: 1]" },
+        { word: "Antebellum", def: "Existing before a war, especially before the American Civil War (1861-65)[cite: 1]" },
+        { word: "Bellicose", def: "Warlike, aggressive, quarrelsome[cite: 1]" },
+        { word: "Belligerence", def: "Aggressiveness, combativeness[cite: 1]" },
+        { word: "Rebellion", def: "Open defiance and opposition, sometimes armed, to a person or thing in authority[cite: 1]" },
+        { word: "Pacify", def: "To soothe anger or agitation; To subdue by armed action[cite: 1]" },
+        { word: "Pacifist", def: "A person opposed to war or violence, especially someone who refuses to bear arms or to fight, on moral or religious grounds[cite: 1]" },
+        { word: "Pact", def: "An agreement between two or more people or groups, a treaty or formal agreement between nations to deal with a problem or resolve a dispute[cite: 1]" },
+        { word: "Pace", def: "Contrary to the opinions of[cite: 1]" },
+        { word: "Criminology", def: "The study of crime, criminals, law enforcement, and punishment[cite: 1]" },
+        { word: "Decriminalize", def: "To remove or reduce the criminal status of[cite: 1]" },
+        { word: "Incriminate", def: "To show evidence or involvement in a crime[cite: 1]" },
+        { word: "Recrimination", def: "An accusation in answer to an accusation made against oneself[cite: 1]" },
+        { word: "Approbation", def: "A formal or official act of approving, praise, usually given with pleasure or enthusiasm[cite: 1]" },
+        { word: "Probate", def: "The process of proving in court that the will of someone who has died is valid, and of administering the estate of a dead person[cite: 1]" },
+        { word: "Probity", def: "Absolute honesty and uprightness[cite: 1]" },
+        { word: "Reprobate", def: "A person of thoroughly bad character[cite: 1]" },
+        { word: "Grave", def: "Requiring serious thought or concern; Serious and formal in appearance or manner[cite: 1]" },
+        { word: "Gravitas", def: "Great or very dignified seriousness[cite: 1]" },
+        { word: "Gravitate", def: "To move or be drawn toward something, especially by a natural tendency or as if by an invisible force[cite: 1]" },
+        { word: "Aggravate", def: "To make an injury more serious or severe; To annoy or bother[cite: 1]" },
+        { word: "Alleviate", def: "To lighten, lessen, or relieve, especially physical or mental suffering[cite: 1]" },
+        { word: "Elevation", def: "The height of a place; The act or result of lifting or raising someone or something[cite: 1]" },
+        { word: "Cantilever", def: "A long piece of wood, metal, etc that sticks out from a wall to support something above it[cite: 1]" },
+        { word: "Levity", def: "Lack of appropriate seriousness[cite: 1]" },
+        
+        // Roots Unit 2
+        { word: "Kleptomania", def: "A mental illness in which a person has a strong desire to steal things[cite: 2]" },
+        { word: "Dipsomaniac", def: "A person with an extreme and uncontrollable desire for alcohol[cite: 2]" },
+        { word: "Megalomaniac", def: "A mental disorder marked by feelings of great personal power or importance[cite: 2]" },
+        { word: "Egomaniac", def: "Someone who is extremely self-centered and ignores the problems and concerns of others[cite: 2]" },
+        { word: "Psyche", def: "soul, personality, mind[cite: 2]" },
+        { word: "Psychedelic", def: "1. Of or relating to a drug that produces abnormal and often extreme mental effects such as hallucinations. 2. Imitating the effects of psychedelic drugs.[cite: 2]" },
+        { word: "Psychosomatic", def: "Caused by mental or emotional problems rather than by physical illness.[cite: 2]" },
+        { word: "Psychotherapist", def: "One who treats mental or emotional disorder or related bodily ills by psychological means.[cite: 2]" },
+        { word: "Reception", def: "1. The act of receiving 2. A social gathering where guests are formally welcomed.[cite: 2]" },
+        { word: "Intercept", def: "To stop, seize, or interrupt (something or someone) before arrival.[cite: 2]" },
+        { word: "Perceptible", def: "Noticeable or able to be felt by the senses[cite: 2]" },
+        { word: "Susceptible", def: "1. Open to some influence, responsive. 2. Able to be submitted to an action or process.[cite: 2]" },
+        { word: "Confine", def: "1. To keep someone or something within limits. 2. To hold someone in a location[cite: 2]" },
+        { word: "Definitive", def: "1. Authoritative and final. 2. Specifying perfectly or precisely.[cite: 2]" },
+        { word: "Finite", def: "Having definite limits.[cite: 2]" },
+        { word: "Infinitesimal", def: "Extremely or immeasurably small.[cite: 2]" },
+        { word: "Interject", def: "To interrupt a conversation with a comment or remark[cite: 2]" },
+        { word: "Conjecture", def: "To guess[cite: 2]" },
+        { word: "Projection", def: "An estimate of what might happen in the future based on what is happening now.[cite: 2]" },
+        { word: "Trajectory", def: "The curved path that an object makes in space, or that a thrown object follows as it rises and falls to earth.[cite: 2]" },
+        { word: "Traction", def: "The friction that allows a moving thing to move over a surface without slipping[cite: 2]" },
+        { word: "Retract", def: "1. To pull back something into something larger. 2. To take back something that has been written.[cite: 2]" },
+        { word: "Protracted", def: "Drawn out, continued, extended[cite: 2]" },
+        { word: "Intractable", def: "Not easily handled, led, taught, or controlled.[cite: 2]" },
+        { word: "Conducive", def: "Tending to promote, encourage, or assist; helpful.[cite: 2]" },
+        { word: "Deduction", def: "1. Subtraction. 2. The reaching of a conclusion by reasoning.[cite: 2]" },
+        { word: "Induce", def: "1. To persuade, influence. 2. Bring about.[cite: 2]" },
+        { word: "Seduction", def: "1. Temptation to sin, especially to engage in sexual intercourse. 2. Attraction or charm.[cite: 2]" },
+        { word: "Sequential", def: "1.Arranged in order or in a series. 2. Following in a series.[cite: 2]" },
+        { word: "Subsequent", def: "Following in time, order, or place; later[cite: 2]" },
+        { word: "Consequential", def: "1. Resulting. 2. Important.[cite: 2]" },
+        { word: "Non sequitur", def: "A statement that does not follow logically from anything previously said.[cite: 2]" },
+        { word: "Apollonian", def: "Harmonious, ordered, rational, calm[cite: 2]" },
+        { word: "Bacchanalian", def: "Frenzied, orgiastic[cite: 2]" },
+        { word: "Delphic", def: "Unclear, ambiguous, or confusing[cite: 2]" },
+        { word: "Dionysian", def: "Frenzied, delirious[cite: 2]" },
+        { word: "Jovial", def: "Jolly, good natured[cite: 2]" },
+        { word: "Mercurial", def: "Having rapid and unpredictable changes of mood[cite: 2]" },
+        { word: "Olympian", def: "Lofty, superior, and detached[cite: 2]" },
+        { word: "Venereal", def: "Having to do with sexual intercourse or diseases transmitted by it.[cite: 2]" }
     ];
 
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
+        let newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
         }
-        return array;
+        return newArray;
     }
 
     // Populate Word Bank
-    const sortedWords = [...masterVocabList].map(item => item.word).sort();
+    const sortedWords = [...masterVocabList].map(item => item.word).sort((a, b) => a.localeCompare(b));
     const wordListElement = document.getElementById('word-list');
     sortedWords.forEach(w => {
         const li = document.createElement('li');
@@ -204,14 +249,15 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     let currentPage = parseInt(urlParams.get('q'));
+    const totalWords = masterVocabList.length; // 72 words
 
     if (isNaN(currentPage)) {
-        // Create 64 questions: Two full shuffled sets of the 32 words
-        const part1 = shuffleArray([...masterVocabList]);
-        const part2 = shuffleArray([...masterVocabList]);
-        const combinedList = part1.concat(part2);
+        // Create two separate randomized blocks to ensure all 72 are tested in Part 1 and again in Part 2
+        const block1 = shuffleArray(masterVocabList);
+        const block2 = shuffleArray(masterVocabList);
+        const fullQuizList = block1.concat(block2); // 144 questions total
         
-        sessionStorage.setItem('vocabQuizList', JSON.stringify(combinedList));
+        sessionStorage.setItem('vocabQuizList', JSON.stringify(fullQuizList));
         sessionStorage.setItem('vocabScore', '0');
         window.location.href = "?q=0";
     } else {
@@ -226,8 +272,8 @@
             return;
         }
 
-        // Toggle Parts (Part 1: 0-31, Part 2: 32-63)
-        if (currentPage < 32) {
+        // Toggle Parts (Part 1: 0-71, Part 2: 72-143)
+        if (currentPage < totalWords) {
             document.getElementById('word-bank-container').style.display = 'block';
             document.getElementById('part-info').textContent = 'Part 1: Word Bank Available';
         } else {
